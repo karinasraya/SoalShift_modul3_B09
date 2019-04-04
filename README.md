@@ -8,12 +8,13 @@ Jawaban :
 
 a. Parameter input dan inisialisasi thread
 
-      int main(int argc, char** args){
-	    pthread_t tid[argc-1]; //inisialisasi thread
+      	int main(int argc, char** args){
+	pthread_t tid[argc-1]; //inisialisasi thread
       
-* Keterangan :
-argc : berfungsi untuk menghitung jumlah input
-args : berfungsi untuk menyimpan input
+Keterangan :
+
+* argc : berfungsi untuk menghitung jumlah input
+* args : berfungsi untuk menyimpan input
 
 b. Urutkan input
 
