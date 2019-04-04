@@ -1,4 +1,3 @@
-#include<stdio.h>
 #include<string.h>
 #include<pthread.h>
 #include<stdlib.h>
@@ -19,7 +18,17 @@ void* hitung(void *args){
 }
 
 int main(int argc, char** args){
+	char* temp;
 	pthread_t tid[argc-1];
+	for(int i=1;i<argc-2;i++){
+		for(int j=1;j<(argc-i-2);j++){
+		if(args[j]>args[j+1]){
+			temp=args[j];
+			args[j]=args[j+1];
+			args[j+1]=temp;
+		}
+		}
+	}
 	for(int i=0;i<argc-1;i++){
 		pthread_create(&(tid[i]),NULL,&hitung,(void*)args[i+1]);
 	}
