@@ -109,7 +109,7 @@ int main(int argc, char const *argv[])
         valread = read( new_socket , buffer, 1024);
         if(strcmp(buffer,"tambah")==0)
         {
-            (*value)++;
+            (*value) + = 1;
             //printf("stok sekarang: %d\n",stok);  
         }
         //sleep(1); 

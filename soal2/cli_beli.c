@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
     //Inputing Request
     char reques[100];
     int loop = 11;
-    while(loop--)
+    while(1)
     {
         scanf("%s",reques);
         if(strcmp(reques,"beli")==0)
