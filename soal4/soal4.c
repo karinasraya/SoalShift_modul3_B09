@@ -40,15 +40,15 @@ void* simpan(void* args){
 	char command[100];
 	struct proses*extract=(struct proses*)args;
 
-	sprintf(command,"mkdir /Documents/FolderProses%d",extract->pros);
+	sprintf(command,"mkdir /home/karinasraya/Documents/FolderProses%d",extract->pros);
 	system(command);
 
 	strcpy(command,"");
-	sprintf(command,"ps aux --no-heading | head -%d | tail -%d> /Document/FolderProses%d/SimpanProses%d.txt",extract->high,10,extract->pros,extract->pros);
+	sprintf(command,"ps aux --no-heading | head -%d | tail -%d> /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt",extract->high,10,extract->pros,extract->pros);
 	system(command);
 
 	strcpy(command,"");
-	sprintf(command,"zip -qmj /Documents/FolderProses%d/KompresProses%d /Documents/FolderProses%d/SimpanProses%d.txt",extract->pros,extract->pros,extract->pros,extract->pros);
+	sprintf(command,"zip -qmj /home/karinasraya/Documents/FolderProses%d/KompresProses%d /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt",extract->pros,extract->pros,extract->pros,extract->pros);
 	system(command);
 }
 
@@ -56,6 +56,6 @@ void* unzip(void* args){
 	char command[100];
 	struct proses*extract=(struct proses*)args;
 	strcpy(command,"");
-	sprintf(command,"unzip -qd /Documents/FolderProses%d /Documents/FolderProses%d/KompresProses%d.zip", extract->pros, extract->pros, extract->pros);
+	sprintf(command,"unzip -qd /home/karinasraya/Documents/FolderProses%d /home/karinasraya/Documents/FolderProses%d/KompresProses%d.zip", extract->pros, extract->pros, extract->pros);
 	system(command);
 }
