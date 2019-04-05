@@ -60,7 +60,7 @@ e. Jangan lupa menggunakan join
 
 f. Jalankan program
 
- [Gambar](/Image/1.PNG)
+![Gambar](/Image/1.PNG)
 
 #
 
