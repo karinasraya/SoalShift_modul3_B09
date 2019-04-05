@@ -4,11 +4,11 @@
 
 Buatlah program C yang bisa menghitung faktorial secara parallel lalu menampilkan hasilnya secara berurutan
 
-Jawaban :
+Jawaban :  [Script Soal 1](/soal1/soal1.c)
 
 a. Parameter input dan inisialisasi thread
 
-      	int main(int argc, char** args){
+      	int main(int argc, char* args[]){
 	pthread_t tid[argc-1]; //inisialisasi thread
       
 Keterangan :
@@ -18,15 +18,15 @@ Keterangan :
 
 b. Urutkan input
 
-      for(int i=1;i<argc-1;i++){
-		    for(int j=0;j<(argc-i-1);j++){
-		      if(args[j+1]>args[j+2]){
-			    temp=args[j+1];
-			    args[j+1]=args[j+2];
-			    args[j+2]=temp;
-		      }
-		    }
-	    }
+	for(int i=1;i<argc-1;i++){
+		for(int j=0;j<(argc-i-1);j++){
+		if(strcmp(args[j+1],args[j+2])<0){
+			temp=args[j+1];
+			args[j+1]=args[j+2];
+			args[j+2]=temp;
+		}
+		}
+	}
       
 c. Masukan input ke thread
 
@@ -56,4 +56,20 @@ e. Jangan lupa menggunakan join
 		  pthread_join(tid[i],NULL);
 	    }
 
+* Dengan menggunakan fungsi join, parent thread pada main function akan menunggu hingga child thread yang diinginkan selesai di eksekusi
+
 #
+
+<b> Soal 2 </b>
+
+#
+
+<b> Soal 3 </b>
+
+#
+
+<b> Soal 4 </b>
+
+#
+
+<b> Soal 5 </b>
