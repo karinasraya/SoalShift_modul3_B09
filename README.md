@@ -78,6 +78,40 @@ Buatlah sebuah program C dimana dapat menyimpan list proses yang sedang berjalan
 
 Jawaban :  [Script Soal 4](/soal4/soal4.c)
 
+a. Mengambil 10 list proses yang sedang berjalan lalu menyimpannya di SimpanProsesX.txt (X=1,2)
+
+	char ambil[1000]="ps -aux | head -%d | tail -%d > /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt";
+	strcpy(ekse,"");
+	sprintf(ekse,ambil,extract->max,10,extract->pros,extract->pros);
+	system(ekse);
+	
+b. Mengkompres zip file
+
+	char zip[1000]="zip -qmj /home/karinasraya/Documents/FolderProses%d/KompresProses%d 
+	/home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt";
+	strcpy(ekse,"");
+	sprintf(ekse,zip,extract->pros,extract->pros,extract->pros,extract->pros);
+	system(ekse);
+	
+c. Tunggu 15 detik
+
+	sleep(15);
+	
+d. Mengekstrak kembali file
+
+	char unzip[1000]="unzip -qd /home/karinasraya/Documents/FolderProses%d 
+	/home/karinasraya/Documents/FolderProses%d/KompresProses%d.zip";
+
+	strcpy(ekse,"");
+	sprintf(ekse,unzip, extract->pros, extract->pros, extract->pros);
+	system(ekse);
+
+e. Jalankan program
+
+![Gambar](/Image/4a.PNG)
+![Gambar](/Image/4b.PNG)
+![Gambar](/Image/4c.PNG)
+
 #
 
 <b> Soal 5 </b>
