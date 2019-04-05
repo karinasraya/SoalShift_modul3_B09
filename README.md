@@ -58,6 +58,10 @@ e. Jangan lupa menggunakan join
 
 * Dengan menggunakan fungsi join, parent thread pada main function akan menunggu hingga child thread yang diinginkan selesai di eksekusi
 
+f. Jalankan program
+
+ [Gambar](/Image/1.PNG)
+
 #
 
 <b> Soal 2 </b>
