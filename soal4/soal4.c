@@ -5,57 +5,60 @@
 #include<unistd.h>
 
 struct proses{
-	int pros, high;
+	int pros, max;
 };
 
 void* simpan(void* args);
 void* unzip(void* args);
 
 int main(){
-	int file=2;
 	pthread_t tid[100];
 	struct proses P;
 	P.pros=0;
-	P.high=10;
+	P.max=10;
 
-	for(int i=1;i<=file;i++){
-		P.pros=i;
-		pthread_create(&tid[i],NULL,&simpan,(void*)&P);
-		P.high+=10;
+	for(int i=0;i<2;i++){
+		P.pros=i+1;
+		pthread_create(&tid[i+1],NULL,&simpan,(void*)&P);
+		pthread_join(tid[i+1],NULL);
+		P.max+=10;
 	}
 
-	for(int i=1;i<=file;i++){
-		pthread_join(tid[i],NULL);
-	}
-	
 	sleep(15);
 
-	for(int i=1;i<=file;i++){
-		P.pros=i;
-		pthread_create(&tid[i],NULL,&unzip,(void*)&P);
+	for(int i=0;i<2;i++){
+		P.pros=i+1;
+		pthread_create(&tid[i+1],NULL,&unzip,(void*)&P);
 	}
 }
 
 void* simpan(void* args){
-	char command[100];
+	char ekse[100];
+	char buat[1000]="mkdir /home/karinasraya/Documents/FolderProses%d";
+	char ambil[1000]="ps -aux | head -%d | tail -%d > /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt";
+	char zip[1000]="zip -qmj /home/karinasraya/Documents/FolderProses%d/KompresProses%d /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt";
+
 	struct proses*extract=(struct proses*)args;
 
-	sprintf(command,"mkdir /home/karinasraya/Documents/FolderProses%d",extract->pros);
-	system(command);
+	sprintf(ekse,buat,extract->pros);
+	system(ekse);
 
-	strcpy(command,"");
-	sprintf(command,"ps aux --no-heading | head -%d | tail -%d> /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt",extract->high,10,extract->pros,extract->pros);
-	system(command);
+	strcpy(ekse,"");
+	sprintf(ekse,ambil,extract->max,10,extract->pros,extract->pros);
+	system(ekse);
 
-	strcpy(command,"");
-	sprintf(command,"zip -qmj /home/karinasraya/Documents/FolderProses%d/KompresProses%d /home/karinasraya/Documents/FolderProses%d/SimpanProses%d.txt",extract->pros,extract->pros,extract->pros,extract->pros);
-	system(command);
+	strcpy(ekse,"");
+	sprintf(ekse,zip,extract->pros,extract->pros,extract->pros,extract->pros);
+	system(ekse);
 }
 
 void* unzip(void* args){
-	char command[100];
+	char ekse[100];
+	char unzip[1000]="unzip -qd /home/karinasraya/Documents/FolderProses%d /home/karinasraya/Documents/FolderProses%d/KompresProses%d.zip";
+
 	struct proses*extract=(struct proses*)args;
-	strcpy(command,"");
-	sprintf(command,"unzip -qd /home/karinasraya/Documents/FolderProses%d /home/karinasraya/Documents/FolderProses%d/KompresProses%d.zip", extract->pros, extract->pros, extract->pros);
-	system(command);
+
+	strcpy(ekse,"");
+	sprintf(ekse,unzip, extract->pros, extract->pros, extract->pros);
+	system(ekse);
 }
