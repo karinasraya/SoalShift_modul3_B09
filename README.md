@@ -16,14 +16,18 @@ Keterangan :
 * argc : berfungsi untuk menghitung jumlah input
 * args : berfungsi untuk menyimpan input
 
-b. Urutkan input
+b. Ubah input ke array of integer lalu urutkan
 
-	for(int i=1;i<argc-1;i++){
-		for(int j=0;j<(argc-i-1);j++){
-		if(strcmp(args[j+1],args[j+2])<0){
-			temp=args[j+1];
-			args[j+1]=args[j+2];
-			args[j+2]=temp;
+	for(int i=0;i<argc-1;i++){
+		konfersi[i]=atoi(args[i+1]);
+	}
+
+	for(int i=0;i<argc-2;i++){
+		for(int j=0;j<(argc-i-2);j++){
+		if(konfersi[j]<konfersi[j+1]){
+			int temp=konfersi[j];
+			konfersi[j]=konfersi[j+1];
+			konfersi[j+1]=temp;
 		}
 		}
 	}
@@ -31,24 +35,24 @@ b. Urutkan input
 c. Masukan input ke thread
 
       for(int i=0;i<argc-1;i++){
-		  pthread_create(&(tid[i]),NULL,&hitung,(void*)args[i+1]);
-	    }
+		pthread_create(&(tid[i]),NULL,&hitung,(void*)&konfersi[i]);
+	}
       
 d. Lakukan perhitungan faktorial
 
-      void* hitung(void *args){
-	    int b=strtol((char*)args,NULL,10);
-	    int hasil=1;
-	      if(b<0){
-		    printf("ERROR!\n");
-	      }
-	      else{
-	        for(int i=1;i<=b;i++){
-		      hasil*=i;
-	        }
-	      printf("%d! = %d\n",b,hasil);
-	      }
-      }
+	void* hitung(void *args){
+		int *b=(int *)args;
+		int hasil=1;
+		if(b<0){
+			printf("ERROR!\n");
+		}
+		else{
+			for(int i=1;i<=*b;i++){
+			hasil*=i;
+			}
+		printf("%d! = %d\n",*b,hasil);
+		}
+	}
 
 e. Jangan lupa menggunakan join
 
