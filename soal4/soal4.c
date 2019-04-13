@@ -29,6 +29,7 @@ int main(){
 	for(int i=0;i<2;i++){
 		P.pros=i+1;
 		pthread_create(&tid[i+1],NULL,&unzip,(void*)&P);
+		pthread_join(tid[i+1],NULL);
 	}
 }
 
