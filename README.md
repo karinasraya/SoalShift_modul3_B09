@@ -76,54 +76,50 @@ Pada server pembeli buatlah socket yang melisten koneksi dari port 8081. Apabila
 apabila buffer yang diterima dari hasil read(socket) sama dengan beli, dan *value lebih besar dari 0, maka server akan mengirimkan "transaksi berhasil" ke client pembeli. Jika *value kurang dari sama dengan 0, maka server akan mengirimkan "transaksi gagal"
 
 	while(1)
-    {
-        valread = read( new_socket , buffer, 1024);
-        if(strcmp(buffer,"beli")==0)
-        {
-            if((*value)>0)
-            {
-                (*value)--;
-                send(new_socket, berhasil, strlen(berhasil), 0);
-            }
-            else
-            {
+    	{
+        	valread = read( new_socket , buffer, 1024);
+        	if(strcmp(buffer,"beli")==0)
+        	{
+           		if((*value)>0)
+            		{
+                	(*value)--;
+                	send(new_socket, berhasil, strlen(berhasil), 0);
+            		}
+            	else
+            	{
                 send(new_socket, gagal, strlen(berhasil), 0);
-            }    
+            	}    
         }
-        //sleep(1); 
     }
 
 2. Server Penjual
 Pada server penjual, dibuat socket yang melisten dari port 8082. Apabila sebuah koneksi telah diterima, lakukan close socket agar hanya ada 1 client yang terkoneksi. Apabila buffer yang diterima dari read() berisi string "tambah", maka nilai *value (stok yang ada) akan bertambah 1.
 
 	while(1)
-    {
-        valread = read( new_socket , buffer, 1024);
-        if(strcmp(buffer,"tambah")==0)
-        {
-            (*value) + = 1;
-            //printf("stok sekarang: %d\n",stok);  
+    	{
+        	valread = read( new_socket , buffer, 1024);
+        	if(strcmp(buffer,"tambah")==0)
+        	{
+            	(*value) + = 1;
         }
-        //sleep(1); 
     }
 
 3. Client Beli
 Pada client dibuat socket yang memint akoneksi ke port 8081. apabila array char reques berisi string "beli" maka client akan mengirimkan string "beli" ke server dan menunggu balasan. kemudian mengeread data yang dikirimkan server.
 
 	while(1)
-    {
-        scanf("%s",reques);
-        if(strcmp(reques,"beli")==0)
-        {
-            send(sock , reques , strlen(reques) , 0 );
-            valread = read( sock , buffer, 1024); 
-            printf("%s\n",buffer ); 
-        }
-        else
-        {
-            printf("Request tidak dimengerti\n");
-        }
-        
+    	{
+        	scanf("%s",reques);
+        	if(strcmp(reques,"beli")==0)
+        	{
+            	send(sock , reques , strlen(reques) , 0 );
+            	valread = read( sock , buffer, 1024); 
+            	printf("%s\n",buffer ); 
+        	}
+        		else
+        		{
+            		printf("Request tidak dimengerti\n");
+        		}
         sleep(1);
     }
 
@@ -131,21 +127,18 @@ Pada client dibuat socket yang memint akoneksi ke port 8081. apabila array char 
 Pada cliet jual, dibuatsocket yang meminta koneksi ke port 8082. apabila array char reques berisi string "tambah" maka client akan mengirimkan string "tambah" ke server.
 
 	while(1)
-    {
+    	{
         scanf("%s",reques);
-        if(strcmp(reques,"tambah")==0)
-        {
-            send(sock , reques , strlen(reques) , 0 );
-            // valread = read( sock , buffer, 1024); 
-            // printf("%s\n",buffer ); 
-        }
-        else
-        {
-            printf("Request tidak dimengerti\n");
-        }
-        
+        	if(strcmp(reques,"tambah")==0)
+        	{
+            	send(sock , reques , strlen(reques) , 0 );
+        	}
+        	else
+        	{
+            	printf("Request tidak dimengerti\n");
+        	}
         sleep(1);
-    }
+    	}
 
 <b> Soal 3 </b>
 
@@ -189,7 +182,7 @@ Syarat Menggunakan Lebih dari 1 Thread
 
 berguna untuk mencegah fitur "Siraj ayo tidur" dijalankan selama 10 detik.
 
-thread kedua
+* thread kedua
 ```
 	void* playandcount2(void *arg)
 	{
@@ -206,9 +199,9 @@ thread kedua
 	}
 ```
 
-pada fungsi main, ketika pengguna mengetikkan "All Status" maka akan menampilkan semua status yang ada. setiap kali pengguna menggunakan fitur Agmal ayo bangun atau Iraj ayo tidur, counter dari masing2 fitur akan diincrement. apabila telah mencapai 3, maka kondisi dari thread akan dijalankan (menyebabkan fitur disleep). apabila waktu telah dipenuhi, maka counter akan direset.
+* Pada fungsi main, ketika pengguna mengetikkan "All Status" maka akan menampilkan semua status yang ada. setiap kali pengguna menggunakan fitur Agmal ayo bangun atau Iraj ayo tidur, counter dari masing2 fitur akan diincrement. apabila telah mencapai 3, maka kondisi dari thread akan dijalankan (menyebabkan fitur disleep). apabila waktu telah dipenuhi, maka counter akan direset.
 
-apabila salah satu status telah mencapai kondisi tertentu, maka program akan keluar.
+* Apabila salah satu status telah mencapai kondisi tertentu, maka program akan keluar.
 `````
 	if(a.Spirit_Status <= 0)
         {
@@ -265,53 +258,54 @@ e. Jalankan program
 #
 
 <b> Soal 5 </b>
-ada beberapa thread
+
+* ada beberapa thread
 ````
 	void* hungry(void *arg)
-{
+	{
 	while(1)
-    {
+    	{
         if(*sceneptr=='1')
         {
             sleep(10);
             dekuptr->hunger_stat-=5;
         }
-    }
+    	}
 	return NULL;
-}
+	}
 
-void* bau(void *arg)
-{
+	void* bau(void *arg)
+	{
 	while(1)
-    {
+    	{
         if(*sceneptr=='1')
         {
             sleep(30);
             dekuptr->hygen_stat= dekuptr->hygen_stat - 10;
         }
         
-    }
+    	}
 	return NULL;
-}
+	}
 
-void* regen(void *arg)
-{
+	void* regen(void *arg)
+	{
 	while(1)
-    {
+    	{
         if(*sceneptr=='1')
         {
             sleep(10);
             dekuptr->health+=5;
         }
         
-    }
+    	}
 	return NULL;
-}
+	}
 
-void* mandichecker(void *arg)
-{
+	void* mandichecker(void *arg)
+	{
 	while(1)
-    {
+    	{
         while(*mandiptr==0)
         {
             if(difftime(time(NULL),jam->lst_bath) >20)
@@ -319,14 +313,14 @@ void* mandichecker(void *arg)
                 *mandiptr=1;
             }
         }
-    }
+    	}
 	return NULL;
-}
+	}
 
-void* makanchecker(void *arg)
-{
-    while(1)
-    {
+	void* makanchecker(void *arg)
+	{
+    	while(1)
+    	{
 	    while(*stokmakanptr<=0)
         {
             if(*stokmakanptr>0)
@@ -336,17 +330,17 @@ void* makanchecker(void *arg)
             
         
         }
-    }
+    	}
 	return NULL;
-}
+	}
 ````
 
-thread hungry berguna untuk mengurangi stat hunger per waktu tertentu
-thread bau berguna untuk mengurangi stat hygen perwaktu tertentu
-thead regen berguna untuk menambah stat health perwarktu tertentu
-thread makanchecker dan mandichecker berguna  untuk mengecheck apakah monster boleh makan/ mandi(stok makanan ada dan mandi sedang tidak cooldown)
+* thread hungry berguna untuk mengurangi stat hunger per waktu tertentu
+* thread bau berguna untuk mengurangi stat hygen perwaktu tertentu
+* thread regen berguna untuk menambah stat health perwarktu tertentu
+* thread makanchecker dan mandichecker berguna  untuk mengecheck apakah monster boleh makan/ mandi(stok makanan ada dan mandi sedang tidak cooldown)
 
-kemudian ada beberapa fungsi
+* kemudian ada beberapa fungsi
 `````
 void siaga(char* sceneptr, int cmd)
 {
@@ -451,7 +445,7 @@ char getch(){
  }
 
 `````
-void siaga,batul,toko berguna untuk memilih schene game yang diinginkan. void makan untuk menambah stat makan dan mengurangi stock makanan, void mandi untuk menambah stat hygen dan membuat fitur tersebut cooldown untuk beberapa waktu, void pilihscene untuk memudahkan memilih scene yang diinginkan.
+* void siaga,batul,toko berguna untuk memilih schene game yang diinginkan. void makan untuk menambah stat makan dan mengurangi stock makanan, void mandi untuk menambah stat hygen dan membuat fitur tersebut cooldown untuk beberapa waktu, void pilihscene untuk memudahkan memilih scene yang diinginkan.
 dan char getch() berguna sebagai input handler dari game.
 
 ````
@@ -497,18 +491,16 @@ monster deku;
 monster *dekuptr = &deku;
 
 ````
-variabel enemyhp berguna sebagai indikator dari nyawa musuh. variabel dengan tipedata monster berguna untuk menyimpan data2 monster. variabel jam berguna untuk menyimpan data waktu terakhir dari makan dan mandi. mandiyuk dan makanyuk berguna sebagai indikator apakah monster boleh makan atau mandi.
+* Variabel enemyhp berguna sebagai indikator dari nyawa musuh. variabel dengan tipedata monster berguna untuk menyimpan data2 monster. variabel jam berguna untuk menyimpan data waktu terakhir dari makan dan mandi. mandiyuk dan makanyuk berguna sebagai indikator apakah monster boleh makan atau mandi.
 
-game dimmulai dengan beberapa stat dari monster telah diinputkan. ketika pemain menekan suatu angka, fungsi getch secara otomatis akan mengambilnya sebagai input dan memilih kondisi if else yang bersesuaian dengan input dan schene saat ini. apabila nyawa monster kita mencapai 0 maka program akan keluar. begitu pula jika stat hunger dan hygen mencapai 0.
+* Game dimmulai dengan beberapa stat dari monster telah diinputkan. ketika pemain menekan suatu angka, fungsi getch secara otomatis akan mengambilnya sebagai input dan memilih kondisi if else yang bersesuaian dengan input dan schene saat ini. apabila nyawa monster kita mencapai 0 maka program akan keluar. begitu pula jika stat hunger dan hygen mencapai 0.
 
-untuk program penjual
+* Untuk program penjual
 ````
 	ey_t key = 1234;
 int *gudang;
 
 char getch(){
-    /*#include <unistd.h>   //_getch*/
-    /*#include <termios.h>  //_getch*/
     char buf=0;
     struct termios old={0};
     fflush(stdout);
@@ -526,7 +518,6 @@ char getch(){
     old.c_lflag|=ECHO;
     if(tcsetattr(0, TCSADRAIN, &old)<0)
         perror ("tcsetattr ~ICANON");
-    //printf("%c\n",buf);
     return buf;
  }
 
@@ -557,6 +548,4 @@ char getch(){
     }
 ````
 
-juga menggunakan fitur getch, ketika cmd mengandung char 1 maka stok di gudang akan diincrement sebanyak 1.
-
-antara game dan program penjual, menggunakan shared memmory.
+* Juga menggunakan fitur getch, ketika cmd mengandung char 1 maka stok di gudang akan diincrement sebanyak 1. Antara game dan program penjual, menggunakan shared memmory.
