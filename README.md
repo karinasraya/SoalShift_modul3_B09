@@ -70,10 +70,10 @@ f. Jalankan program
 
 <b> Soal 2 </b>
 
-# 
 1. Server Pembeli
 Pada server pembeli buatlah socket yang melisten koneksi dari port 8081. Apabila sebuah koneksi telah diterima, lakukan close socket agar hanya ada 1 client yang terkoneksi.
 apabila buffer yang diterima dari hasil read(socket) sama dengan beli, dan *value lebih besar dari 0, maka server akan mengirimkan "transaksi berhasil" ke client pembeli. Jika *value kurang dari sama dengan 0, maka server akan mengirimkan "transaksi gagal"
+
 
 	while(1)
     	{
@@ -91,6 +91,7 @@ apabila buffer yang diterima dari hasil read(socket) sama dengan beli, dan *valu
             	}    
         }
     }
+    
 
 2. Server Penjual
 Pada server penjual, dibuat socket yang melisten dari port 8082. Apabila sebuah koneksi telah diterima, lakukan close socket agar hanya ada 1 client yang terkoneksi. Apabila buffer yang diterima dari read() berisi string "tambah", maka nilai *value (stok yang ada) akan bertambah 1.
@@ -139,6 +140,8 @@ Pada cliet jual, dibuatsocket yang meminta koneksi ke port 8082. apabila array c
         	}
         sleep(1);
     	}
+
+#
 
 <b> Soal 3 </b>
 
@@ -214,6 +217,8 @@ berguna untuk mencegah fitur "Siraj ayo tidur" dijalankan selama 10 detik.
             break;
         }
 `````
+
+#
 
 <b> Soal 4 </b>
 
